@@ -1,17 +1,18 @@
-createJogador = require("jogador")
+createJogo = require("jogo")
+
+novoJogo = createJogo:create()
 
 
-jogadorUm = createJogador:inicializar()
-jogadorDois = createJogador:inicializar()
+novoJogo.jogadorUm.tabuleiro:posicionarNavios()
 
-print("Jogadores")
-print(jogadorUm)
-print(jogadorDois)
+print("###  JOGADOR UM ###")
+novoJogo.jogadorUm.tabuleiro:visualizar()
+print("###  JOGADOR DOIS ###")
+novoJogo.jogadorDois.tabuleiro:visualizar()
+print("###  JOGADOR UM TABULEIRO ADVERSARIO ###")
+novoJogo.jogadorUm.tabuleiroAdversario:visualizar()
+print("###  JOGADOR DOIS TABULEIRO ADVERSARIO ###")
+novoJogo.jogadorDois.tabuleiroAdversario:visualizar()
 
-jogadorUm.tabuleiro:visualizar()
-jogadorUm.tabuleiro:posicionarNavios(5,5)
-jogadorUm.tabuleiro:visualizar()
-jogadorDois.tabuleiro:visualizar()
-jogadorUm.tabuleiroAdversario:visualizar()
 
 
