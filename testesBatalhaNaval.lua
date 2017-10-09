@@ -1,62 +1,81 @@
 luaunit = require("luaunit")
 novoJogo = require("jogo")
 
-function testPosicaoValidaNavio()
-
+function testPosicaoValidaNavioJogadorUm()
 
 	local jogo = novoJogo:create()
-	luaunit.assertEquals(jogo.jogadorUm.tabuleiro:posicaoValida(9, 7), true)
-	luaunit.assertEquals(jogo.jogadorDois.tabuleiro:posicaoValida(9, 7), true)
+	luaunit.assertTrue(jogo.jogadorUm.tabuleiro:posicaoValida(9, 7))
 
 end
 
-function testPosicaoInvalidaNavio()
+function testPosicaoValidaNavioJogadorDois()
+
+
+	local jogo = novoJogo:create()
+	luaunit.assertTrue(jogo.jogadorDois.tabuleiro:posicaoValida(5, 4))
+
+end
+
+function testPosicaoInvalidaNavioJogadorUm()
 
 	local jogo = novoJogo:create()
 	luaunit.assertEquals(jogo.jogadorUm.tabuleiro:posicaoValida(11, 7), false)
-	luaunit.assertEquals(jogo.jogadorDois.tabuleiro:posicaoValida(11, 7), false)
 
 end
 
-function testPosicionarNavioValido()
+function testPosicaoInvalidaNavioJogadorDois()
 
 	local jogo = novoJogo:create()
-	luaunit.assertEquals(jogo.jogadorUm.tabuleiro:posicionarNaviosNovo(5, 7), true)
-
+	luaunit.assertEquals(jogo.jogadorDois.tabuleiro:posicaoValida(21, 7), false)
 
 end
 
-function testPosicionarNavioPosicaoInvalida()
+function testPosicionarNavioUmPorUmValidoJogadorUm()
 
 	local jogo = novoJogo:create()
-	jogo.jogadorUm.tabuleiro[9][9] = "NAVIO"
-	luaunit.assertEquals(jogo.jogadorUm.tabuleiro:posicionarNaviosNovo(8, 8), false)
+	luaunit.assertTrue(jogo.jogadorUm.tabuleiro:posicionarNavios({5,7}, 1))
 
 end
 
-
-function testPosicionarNavioPosicaoInexistente()
+function testPosicionarNavioUmPorUmValidoJogadorDois()
 
 	local jogo = novoJogo:create()
-	luaunit.assertEquals(jogo.jogadorUm.tabuleiro:posicionarNaviosNovo(11, 8), false)
+	luaunit.assertTrue(jogo.jogadorDois.tabuleiro:posicionarNavios({8,7}, 1))
 
+end
+
+function testPosicionarNavioUmPorUmInvalidoJogadorDois()
+
+	local jogo = novoJogo:create()
+	luaunit.assertEquals(jogo.jogadorDois.tabuleiro:posicionarNavios({0,2}, 1), false)
+
+end
+
+function testPosicionarNavioUmPorUmInvalidoJogadorUm()
+
+	local jogo = novoJogo:create()
+	luaunit.assertEquals(jogo.jogadorUm.tabuleiro:posicionarNavios({1,90}, 1), false)
+
+end
+
+function testverificaPosicoesNavioUmPorUmInvalido()
+
+	local jogo = novoJogo:create()
+	luaunit.assertEquals(jogo.jogadorUm.tabuleiro:verificaPosicoesNavio({7,0}, 1), false)
 
 end
 
 function testTiroValido()
 
 	local jogo = novoJogo:create()
-	tabuleiroAdversario = jogo.jogadorUm.tabuleiro
-	luaunit.assertEquals(jogo:tiroValido(5,5,tabuleiroAdversario), true)
+	luaunit.assertTrue(jogo:tiroValido(3,6,jogo.jogadorUm.tabuleiro))
 
 end
 
-
 function testTiroInvalido()
 
-
 	local jogo = novoJogo:create()
-	luaunit.assertEquals(jogo:tiroValido(0,2,jogo.jogadorUm.tabuleiro), false)
+	luaunit.assertEquals(jogo:tiroValido(3,11,jogo.jogadorUm.tabuleiro), false)
 
 end
 

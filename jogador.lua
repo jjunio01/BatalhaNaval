@@ -1,4 +1,4 @@
-jogador = {nome, id, tabuleiro, tabuleiroAdversario}
+jogador = {nome, id, tabuleiro, tabuleiroAdversario, pontuacao, jogadorAdversario}
 
 
 function jogador:inicializar()
